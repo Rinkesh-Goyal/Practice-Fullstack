@@ -17,6 +17,7 @@ console.log(thehobbit.info());
 function Plant(){
     this.country="India";
     this.isOrganic=true;
+    
 }
 
 Plant.prototype.sayNameAndColor=function(){
@@ -93,7 +94,7 @@ console.log(famousPerson.toString());
 //     __proto__:animals
 // };
 
-// // rabbit.__proto__=animal;
+
 
 // alert(rabbits.eats);
 // alert(rabbits.jumps);
@@ -181,7 +182,7 @@ console.log(famousPerson.toString());
 //   for(let prop in rabbit) alert(prop);
 
 
-//   //Example 7
+// //   //Example 7
 //   let animal = {
 //     eats: true
 //   };
@@ -202,21 +203,66 @@ console.log(famousPerson.toString());
 //   }
 
 
-function Student(){
+// function Student(){
 
-}
+// }
 
-Student.prototype.sayName=function(){
-    console.log(this.name);
-}
+// Student.prototype.sayName=function(){
+//     console.log(this.name);
+// }
 
-function EightGrader(name){
-    this.name=name;
-    this.grade=8;
-}
+// function EightGrader(name){
+//     this.name=name;
+//     this.grade=8;
+// }
 
-EightGrader.prototype=Object.create(Student.prototype);
+// EightGrader.prototype=Object.create(Student.prototype);
 
-const carl=new EightGrader("carl");
-carl.sayName();
+// const carl=new EightGrader("carl");
+// carl.sayName();
+
+// let a=17;
+// let change=(x)=>{
+//   a = x;
+// };
+
+// change(99);
+// console.log(a);
+
+//the difference between defining methods via the prototype vs defining them in the constructor.
+
+// If your methods do not use local variables defined in your constructor (your example doesn't), then use the prototype approach.
+
+// If you're creating lots of Objects, use the prototype approach. This way, all "instances" (i.e. objects created by the object constructor) will share one set of functions, whereas the constructor way, a new set of functions is created every time the object constructor is called, using more memory.
+
+// If you're creating a small number of objects and find that using local, "private" variables in your constructor improves your code, this may be the better approach. Use your judgment and do some benchmarks if performance or memory consumption are major concerns.
+
+// For example, the code below uses a local variable in the constructor to keep track of the number of times this dog has barked while keeping the actual number private, so the barking-related methods are defined inside the constructor. Tail wagging does not require access to the number of barks, therefore that method can be defined on the prototype.
+
+var Dog = function(name) {
+    this.name = name;
+
+    var barkCount = 0;
+
+    this.bark = function() {
+        barkCount++;
+        alert(this.name + " bark");
+    };
+
+    this.getBarkCount = function() {
+        alert(this.name + " has barked " + barkCount + " times");
+    };
+};
+
+Dog.prototype.wagTail = function() {
+    alert(this.name + " wagging tail");
+};
+
+var dog = new Dog("Dave");
+dog.bark();
+dog.bark();
+dog.getBarkCount();
+dog.wagTail();
+
+
 

@@ -226,5 +226,51 @@ class Button {
   let clock = new Clock({template: 'h:m:s'});
   clock.start();
 
+//Static methods and fields
+//Static members (properties and methods) are called without instantiating their class and cannot be called through a class instance.
 
+//both can be called using class name only
+class Point {
+    constructor(x, y) {
+      this.x = x;
+      this.y = y;
+    }
+  
+    static displayName = "Point";
+    static distance(a, b) {
+      const dx = a.x - b.x;
+      const dy = a.y - b.y;
+  
+      return Math.hypot(dx, dy);//Returns the square root of sum of squares of it arguments.
+    }
+  }
+  
+  const p1 = new Point(5, 5);
+  const p2 = new Point(10, 10);
+  p1.displayName; // undefined
+  p1.distance;    // undefined
+  p2.displayName; // undefined
+  p2.distance;    // undefined
+  
+  console.log(Point.displayName);      // "Point"
+  console.log(Point.distance(p1, p2)); // 7.0710
+
+//   When a static or prototype method is called without a value for this, such as by assigning the method to a variable and then calling it, the this value will be undefined inside the method. 
+class Animal {
+    speak() {
+      return this;
+    }
+    static eat() {
+      return this;
+    }
+  }
+  
+  let obj = new Animal();
+  obj.speak(); //return the Animal object since we are 
+  let speak = obj.speak;
+  speak(); // undefined
+  
+  Animal.eat() //return the class Animal
+  let eat = Animal.eat;
+  eat(); // undefined
   
